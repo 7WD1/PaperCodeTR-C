@@ -11,7 +11,7 @@ license = { file = "LICENSE" }
 requires-python = ">=3.10"
 authors = [
     { name = "Wen-Dong Jiang" },
-    { name = "Zijun Wu", email = "zijunwu1984a@163.com" },
+    { name = "Zijun Wu", email = "zijun.wu@hfut.edu.cn" },
     { name = "Jiancheng Long", email = "jianchenglong@hfut.edu.cn" },
 ]
 keywords = [

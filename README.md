@@ -11,7 +11,7 @@
 
 **Wen-Dong Jiang**, **Zijun Wu\***, and **Jiancheng Long**  
 *School of Automotive and Transportation Engineering, Hefei University of Technology, Hefei 230009, Anhui, China*  
-\*Corresponding author: `zijunwu1984a@163.com`
+\*Corresponding author: `zijun.wu@hfut.edu.cn`
 
 </div>
 
