@@ -1,0 +1,24 @@
+# ==============================================================================
+# Verbatim Layer 4 Semantic Prompts & Sample Verified Payload (Paper Appendix A)
+# ==============================================================================
+system_prompt: >-
+  You are a transportation incident parser for Zone {r} (valid link_ids: {A_r}).
+  Given an incident dispatch and optional historical RAG analogs (cosine >= 0.78),
+  output ONLY a JSON object matching {link_ids, severity, phi, duration, confidence,
+  priority_flag, rationale}. Enforce phi in [0.2, 1.0] (or 0.05 only if official
+  police/hazmat ban), severity in {1..4}, duration in [1..24] steps, confidence in
+  [0,1], priority_flag in {none,emerg,ban}. Do NOT assign vehicle routes.
+
+diagnostic_retry_prompt: >-
+  Guardrail violation detected: {exact_gate_error_trace}. Regenerate a valid JSON
+  payload satisfying all physical bounds for Zone {r}; otherwise the physics prior
+  will override.
+
+sample_verified_payload_case_a:
+  link_ids: [16, 18]
+  severity: 3
+  phi: 0.60
+  duration: 6
+  confidence: 0.94
+  priority_flag: "none"
+  rationale: "Two-lane rainstorm collision blocking southbound arterial; gradual clearance after 18:10."

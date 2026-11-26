@@ -1,0 +1,102 @@
+# ==============================================================================
+# Four-Tier Progressive Benchmark Testbeds (Paper Table 4a & Section 4.1)
+# ==============================================================================
+tiers:
+  tier1_analytical:
+    braess_paradox:
+      name: "Braess paradox"
+      nodes: 4
+      links: 5
+      od_pairs: 1
+      total_trips: 4000
+      simulator: "bpr_analytical"
+      eta_eff: 1.0
+      analytical_bounds:
+        ue_cost: 2.000
+        so_cost: 1.500
+        poa: 1.333
+    two_fleet_parallel:
+      name: "Two-fleet parallel"
+      nodes: 4
+      links: 2
+      od_pairs: 1
+      total_trips: 6000
+      simulator: "bpr_analytical"
+      eta_eff: 1.0
+      analytical_bounds:
+        fo_cost: 19.870
+        so_cost: 19.600
+        ue_cost: 20.140
+
+  tier2_multiod:
+    nguyen_dupuis:
+      name: "Nguyen-Dupuis (ND)"
+      nodes: 13
+      links: 19
+      od_pairs: 4
+      total_trips: 6600
+      simulator: "uxsim"
+      tntp_path: "data/tntp/Nguyen-Dupuis"
+    ortuzar_willumsen:
+      name: "Ortuzar-Willumsen (OW)"
+      nodes: 13
+      links: 24
+      od_pairs: 6
+      total_trips: 6000
+      simulator: "uxsim"
+      tntp_path: "data/tntp/Ortuzar-Willumsen"
+
+  tier3_metropolitan:
+    sioux_falls:
+      name: "Sioux Falls (SF)"
+      nodes: 24
+      links: 76
+      od_pairs: 528
+      total_trips: 360600
+      coalition_units: 64
+      macro_stakeholders: 6
+      simulator: "uxsim"
+      micro_audit_simulator: "sumo"
+      sumo_demand_scale: 0.05
+      tntp_path: "data/tntp/SiouxFalls"
+    anaheim:
+      name: "Anaheim (ANA)"
+      nodes: 416
+      links: 914
+      od_pairs: 1406
+      total_trips: 104694
+      simulator: "uxsim"
+      tntp_path: "data/tntp/Anaheim"
+
+  tier4_megacity:
+    chicago_sketch:
+      name: "Chicago Sketch (CHI)"
+      nodes: 933
+      links: 2950
+      od_pairs: 93135
+      total_trips: 1260907
+      simulator: "dtalite"
+      tntp_path: "data/tntp/ChicagoSketch"
+
+zero_shot_categories:
+  - id: "C1"
+    name: "Blizzard icing"
+    requires_gate4: false
+  - id: "C2"
+    name: "Hazmat tanker rollover closure"
+    requires_gate4: true
+    priority_flag: "ban"
+  - id: "C3"
+    name: "Multi-ambulance priority corridor"
+    requires_gate4: true
+    priority_flag: "emerg"
+  - id: "C4"
+    name: "Tunnel water seepage speed limit"
+    requires_gate4: false
+  - id: "C5"
+    name: "Rally egress temporary road ban"
+    requires_gate4: true
+    priority_flag: "ban"
+  - id: "C6"
+    name: "Freight truck ramp rollover"
+    requires_gate4: false

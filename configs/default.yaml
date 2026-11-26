@@ -1,0 +1,65 @@
+# ==============================================================================
+# Default NashCo-LLM Hyperparameters (Paper Table 4b & Section 3)
+# ==============================================================================
+experiment:
+  seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  disruption_periods: [5, 9, 13, 17]
+  control_budget_sec: 300.0
+
+horizon:
+  delta_t_min: 5.0          # Rolling control interval \Delta t (min)
+  num_periods: 20           # Rolling horizon H = 20 (100-min peak window)
+
+layer2_regional:
+  num_zones_K: 8            # METIS / MFD regional partition granularity K
+  trigger_threshold: 0.12   # Disjunctive speed-anomaly threshold \vartheta_trig
+  top_q_links: 3            # Top-q anomaly guard against zone-size dilution
+  v_min_kmh: 5.0            # Gridlock floor v_min (km/h) in Eq. (1)
+
+layer3_equilibrium:
+  bpr_b: 0.15               # BPR surrogate coefficient b
+  bpr_p: 4.0                # BPR surrogate exponent p
+  beta_safe_ratio: 0.15     # Safety weight \beta_safe = 0.15 * free_flow_time
+  risk_density_coeff: 0.15  # g_risk(x_a) = 1 + 0.15 * (x_a / (phi_a * C_a))
+  theta_hdv: 1.0            # HDV logit dispersion \theta_HDV
+  entropy_tau: 0.08         # Entropy regularization weight \tau
+  mirror_prox_gamma0: 0.35  # Initial Mirror-Prox step \gamma_0
+  mirror_prox_kappa: 0.60   # Robbins-Monro decay exponent \kappa
+  vi_tolerance: 1.0e-6      # Relative path-share convergence tolerance \epsilon_VI
+  vi_edge_tolerance: 1.0e-5 # Edge-mode tolerance (ablation A5b)
+  max_vi_iters: 200
+
+layer4_semantic:
+  provider: "openai"        # openai | vllm | mock
+  model_name: "gpt-4o-2024-11-20"
+  temperature: 0.2          # Decoding temperature \tau_L
+  top_p: 0.9
+  max_tokens: 512
+  rag_embedding_model: "text-embedding-3-small"
+  rag_top_k: 8
+  rag_cosine_threshold: 0.78
+  max_reflection_retries: 1
+  phi_min_routine: 0.20     # Gate 2 routine lower bound \phi_min
+  phi_ban_closure: 0.05     # Gate 4 official road-ban closure \phi_ban
+  ramp_recovery_cap: 0.25   # Gate 3 asymmetric upward ramp bound \kappa_rec
+  r_max: 1.0
+  zeta_max: 2.0
+  calib_interval_steps: 3   # Dual-agent calibration cadence (every 3 periods)
+  calib_lambda: 0.25        # Projected calibration damping \lambda_cal
+  alpha_bounds: [0.5, 3.0]
+
+layer1_cooperative:
+  eta_eff_base: 0.05        # Calibrated second-best MSC rate \eta_0
+  eta_eff_full: 1.00        # Tier 1 exact Pigouvian internalization
+  adaptive_eta_enabled: true
+  adaptive_beta: 1.35       # Exponent \beta_\eta in Eq. (14)
+  eta_bounds: [0.05, 0.25]
+  compliance_defection_gain: 1.5
+  compliance_min: 0.60
+  owen_samples_M: 10000     # Stratified Monte Carlo budget M
+  num_critical_cuts: 64     # |S_crit| active-set core cuts
+  qp_smoothing_rel: 1.0e-3  # Scale-invariant \delta_qp = 1e-3 * v(M) / |M|
+  qp_penalty_mu: 10.0       # Dimensionless core-violation penalty \mu
+  qp_solver: "gurobi"       # gurobi | osqp | scipy
+  qp_tolerance: 1.0e-8
+  initial_wallet_endowment: 100.0

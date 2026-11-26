@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nashco-llm"
+version = "1.0.0"
+description = "NashCo-LLM: Dual-Entropy Four-Layer Hierarchical Multi-Agent Control for Dynamic Traffic Assignment"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [
+    { name = "Wen-Dong Jiang" },
+    { name = "Zijun Wu", email = "zijunwu1984a@163.com" },
+    { name = "Jiancheng Long", email = "jianchenglong@hfut.edu.cn" },
+]
+keywords = [
+    "dynamic traffic assignment",
+    "large language models",
+    "variational inequality",
+    "mirror-prox",
+    "owen-shapley",
+    "mobility credits",
+    "intelligent transportation systems",
+]
+dependencies = [
+    "numpy>=1.26.0",
+    "pyyaml>=6.0.1",
+    "jsonschema>=4.23.0",
+    "matplotlib>=3.8.0",
+]
+
+[project.optional-dependencies]
+solvers = ["scipy>=1.12.0", "osqp>=0.6.7"]
+llm = ["openai>=1.55.0", "langgraph>=0.2.45", "faiss-cpu>=1.8.0"]
+sim = ["uxsim>=1.7.1", "path4gmns>=0.9.6"]
+dev = ["pytest>=8.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/7WD1/PaperCodeTR-C"
+Repository = "https://github.com/7WD1/PaperCodeTR-C"
+
+[tool.setuptools.packages.find]
+where = ["src"]
