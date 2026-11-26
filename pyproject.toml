@@ -10,7 +10,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 authors = [
-    { name = "Wen-Dong Jiang" },
+    { name = "Wen-Dong Jiang", email = "wendongjiang@ieee.org" },
     { name = "Zijun Wu", email = "zijun.wu@hfut.edu.cn" },
     { name = "Jiancheng Long", email = "jianchenglong@hfut.edu.cn" },
 ]
